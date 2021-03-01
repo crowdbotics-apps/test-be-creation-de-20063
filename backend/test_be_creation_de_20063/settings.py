@@ -69,6 +69,8 @@ THIRD_PARTY_APPS = [
     # start fcm_django push notifications
     'fcm_django',
     # end fcm_django push notifications
+    'allauth.socialaccount.providers.facebook', # add this line here
+    'allauth.socialaccount.providers.apple', # add this other line
 
 ]
 INSTALLED_APPS += LOCAL_APPS + THIRD_PARTY_APPS
@@ -243,3 +245,35 @@ if DEBUG or not (EMAIL_HOST_USER and EMAIL_HOST_PASSWORD):
     if not DEBUG:
         logging.warning("You should setup `SENDGRID_USERNAME` and `SENDGRID_PASSWORD` env vars to send emails.")
     EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
+
+REST_FRAMEWORK = {
+    "DEFAULT_AUTHENTICATION_CLASSES": (
+        "rest_framework.authentication.TokenAuthentication",
+        "rest_framework.authentication.SessionAuthentication",
+    ),
+}
+
+# Update this with real values
+SOCIALACCOUNT_PROVIDERS = {
+    "apple": {
+        "APP": {
+            # Your service identifier.
+            "client_id": "com.crowdbotics.social-login-1234,
+
+            # The Key ID (visible in the "View Key Details" page).
+            "secret": "sociallogintest1234",
+
+             # Member ID/App ID Prefix -- you can find it below your name
+             # at the top right corner of the page, or it’s your App ID
+             # Prefix in your App ID.
+            "key": "ABCDEFG",
+
+            # The certificate you downloaded when generating the key.
+            "certificate_key": """-----BEGIN PRIVATE KEY-----
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA 
+-----END PRIVATE KEY-----
+"""
+        }
+    }
+}
