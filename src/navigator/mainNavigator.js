@@ -8,9 +8,10 @@ import SideMenu from "./sideMenu"
 
 /**
  * new navigators can be imported here
- */
+ */ import ImageCardList117735 from "../features/ImageCardList117735/navigator"
 
 const AppNavigator = {
+  ImageCardList117735: { screen: ImageCardList117735 },
   //@BlueprintNavigationInsertion
 
   /** new navigators can be added here */
